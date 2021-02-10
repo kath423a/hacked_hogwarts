@@ -44,6 +44,11 @@ function showPopup(entry) {
   //Make the popup with all the details
   popup.querySelector(".firstname").textContent = `${entry.fullname}`;
   popup.querySelector(".middlename").textContent = `${entry.movie}`;
+
+  //Get the images from 'images'-folder
+  popup.querySelector(
+    ".studentphoto"
+  ).src = `images/${titel.gsx$billede.$t}.png`;
 }
 
 document
