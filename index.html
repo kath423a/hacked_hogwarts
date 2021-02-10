@@ -7,6 +7,37 @@
     <title>11C.04.04 - Hacked Hogwarts Student List</title>
   </head>
   <body>
+    <h1>Hogwarts Student List</h1>
+
+    <!--PopUp-window with detailed information about the selected student-->
+    <section id="popup">
+      <article>
+        <div id="luk">X</div>
+        <section>
+          <h2>Firstname: <span class="firstname"></span></h2>
+          <h3>Middlename: <span class="middlename"></span></h3>
+          <h3>Lastname: <span class="lastname"></span></h3>
+          <h3>Nickname: <span class="nickname"></span></h3>
+          <h3>Blood Status: <span class="bloodstatus"></span></h3>
+          <h3>Student Status: <span class="studentstatus"></span></h3>
+          <h3>
+            House Crest and Colors: <span class="house_crest_colors"></span>
+          </h3>
+          <img class="studentphoto" src="" alt="" />
+        </section>
+      </article>
+    </section>
+
+    <div id="container"></div>
+
+    <!-- Template shows the html-strukture for each student on the main interface -->
+    <template>
+      <article>
+        <h2 class="student_name"></h2>
+        <p class="student_house"></p>
+      </article>
+    </template>
+
     <script src="script.js"></script>
   </body>
 </html>
