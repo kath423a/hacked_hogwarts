@@ -28,9 +28,7 @@ function showNames() {
       klon.querySelector(".student_house").textContent = `${entry.house}`;
 
       //Eventlisteners for article, so "click" goes to popup, via showPopup-funktionen
-      klon
-        .querySelector("article")
-        .addEventListener("click", () => showPopup(entry));
+      klon.querySelector("article").addEventListener("click", () => showPopup(entry));
 
       //For each object the template will add to the container as a new child
       container.appendChild(klon);
@@ -43,14 +41,9 @@ function showPopup(entry) {
 
   //Make the popup with all the details
   popup.querySelector(".firstname").textContent = `${entry.fullname}`;
-  popup.querySelector(".middlename").textContent = `${entry.movie}`;
 
   //Get the images from 'images'-folder
-  popup.querySelector(
-    ".studentphoto"
-  ).src = `images/${titel.gsx$billede.$t}.png`;
+  popup.querySelector(".studentphoto").src = `images/${titel.gsx$billede.$t}.png`;
 }
 
-document
-  .querySelector("#luk")
-  .addEventListener("click", () => (popup.style.display = "none"));
+document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
