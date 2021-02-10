@@ -1,0 +1,35 @@
+h1 {
+  text-align: center;
+}
+
+#popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vw;
+  display: none;
+}
+
+#popup article {
+  width: 40vw;
+  height: 25vw;
+  margin: 4rem auto;
+  background-color: rgb(161, 182, 209);
+}
+
+#luk {
+  position: fixed;
+  top: 0;
+  right: 1em;
+  background-color: white;
+  color: black;
+  border-radius: 80px;
+  padding: 0.1em;
+}
+
+#container {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
