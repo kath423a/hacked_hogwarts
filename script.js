@@ -27,21 +27,23 @@ function showNames() {
       klon.querySelector(".student_name").textContent = `${entry.fullname}`;
       klon.querySelector(".student_house").textContent = `${entry.house}`;
 
-      //Eventlisteners bliver tilføjet hver article, så man via klik bliver henvist til vores singleview-site, via visDetaljer-funktionen
+      //Eventlisteners for article, so "click" goes to popup, via showPopup-funktionen
       klon
         .querySelector("article")
-        .addEventListener("click", () => visDetaljer(entry));
+        .addEventListener("click", () => showPopup(entry));
 
-      //for hvert objekt bliver templated tilføjet vores container som nyt child.
+      //For each object the template will add to the container as a new child
       container.appendChild(klon);
     }
   });
 }
 
-function visDetaljer(entry) {
+function showPopup(entry) {
   popup.style.display = "block";
-  popup.querySelector(".actorname").textContent = `${entry.fullname}`;
-  popup.querySelector(".moviename").textContent = `${entry.movie}`;
+
+  //Make the popup with all the details
+  popup.querySelector(".firstname").textContent = `${entry.fullname}`;
+  popup.querySelector(".middlename").textContent = `${entry.movie}`;
 }
 
 document
