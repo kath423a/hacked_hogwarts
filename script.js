@@ -9,7 +9,7 @@ let filter = "all";
 
 //Get the array
 async function getData() {
-  const JSONData = await fetch("./students.json");
+  const JSONData = await fetch("//petlatkea.dk/2021/hogwarts/students.json");
   names = await JSONData.json();
 
   showNames();
