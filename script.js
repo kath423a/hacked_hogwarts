@@ -18,6 +18,8 @@ const Student = {
 
 const settings = {
   filter: "all",
+  sortBy: "name",
+  sortDir: "asc",
 };
 
 function start() {
@@ -116,20 +118,20 @@ function filterList(filteredList) {
   return filteredList;
 }
 
-function isGryffindor(student) {
-  return student.house === "gryffindor";
+function isGryffindor(house) {
+  return house.house === "Gryffindor";
 }
 
-function isHufflepuff(student) {
-  return student.house === "hufflepuff";
+function isHufflepuff(house) {
+  return house.house === "Hufflepuff";
 }
 
-function isSlytherin(student) {
-  return student.house === "slytherin";
+function isSlytherin(house) {
+  return house.house === "Slytherin";
 }
 
-function isRavenclaw(student) {
-  return student.house === "ravenclaw";
+function isRavenclaw(house) {
+  return house.house === "Ravenclaw";
 }
 
 function selectSort(event) {
