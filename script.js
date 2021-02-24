@@ -136,7 +136,7 @@ function sortList(sortedList) {
   if (settings.sortDir === "desc") {
     direction = -1;
   } else {
-    settings.direction = 1;
+    direction = 1;
   }
 
   sortedList = sortedList.sort(sortByProperty);
@@ -163,7 +163,7 @@ function buildList() {
 
 function displayList(students) {
   //clear the list
-  document.querySelector("#list tbody").innerHTML = "";
+  document.querySelector("#student_list").innerHTML = "";
 
   // console.log(students);
 
