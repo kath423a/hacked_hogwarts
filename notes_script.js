@@ -47,3 +47,10 @@ function showPopup(entry) {
 }
 
 document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
+
+//Copied from original
+const texts = jsonObject.fullname.split(" ");
+student.firstname = texts[0].substring(0, 1).toUpperCase() + texts[0].substring(1);
+student.lastname = texts[1];
+student.gender = jsonObject.gender;
+student.house = jsonObject.house.toLowerCase().trim();

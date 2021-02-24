@@ -33,3 +33,33 @@ h1 {
   grid-gap: 15px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+/* ............................ */
+
+[data-action] {
+  cursor: pointer;
+}
+#sorting th.sortby {
+  text-decoration: underline;
+}
+
+#sorting th.sortby[data-sort-direction="asc"]::after {
+  content: "⇓";
+}
+
+#sorting th.sortby[data-sort-direction="desc"]::after {
+  content: "⇑";
+}
+
+#list {
+  justify-content: center;
+}
+
+#student_list tr:nth-child(odd) td {
+  background-color: rgb(161, 130, 90);
+  border-right: rgb(233, 243, 250) 1px dotted;
+}
+
+#list tbody tr:nth-child(even) td {
+  border-right: rgb(171, 219, 252) 1px dotted;
+}

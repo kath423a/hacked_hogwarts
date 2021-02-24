@@ -51,11 +51,12 @@ function prepareObjects(jsonData) {
 function prepareObject(jsonObject) {
   const student = Object.create(Student);
 
+  //split the fullname into first- and lastname and get that data
   const texts = jsonObject.fullname.split(" ");
-  student.firstname = texts[0];
+  student.firstname = texts[0].substring(0, 1).toUpperCase() + texts[0].substring(1);
   student.lastname = texts[1];
   student.gender = jsonObject.gender;
-  student.house = jsonObject.house;
+  student.house = jsonObject.house.toLowerCase().trim();
 
   return student;
 }
@@ -155,6 +156,8 @@ function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
 
+  // console.log(sortedList);
+
   displayList(sortedList);
 }
 
@@ -162,11 +165,14 @@ function displayList(students) {
   //clear the list
   document.querySelector("#list tbody").innerHTML = "";
 
+  // console.log(students);
+
   //build a new list
   students.forEach(displayStudent);
 }
 
 function displayStudent(student) {
+  // console.log(student);
   //create clone
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
@@ -176,5 +182,5 @@ function displayStudent(student) {
   clone.querySelector("[data-field=gender]").textContent = student.gender;
   clone.querySelector("[data-field=house]").textContent = student.house;
 
-  buildList();
+  document.getElementById("student_list").appendChild(clone);
 }
