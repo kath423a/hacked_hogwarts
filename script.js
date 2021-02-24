@@ -12,6 +12,8 @@ const Student = {
   lastname: "",
   gender: "",
   house: "",
+  middlename: "null",
+  nickname: "null",
 };
 
 const settings = {
@@ -33,32 +35,59 @@ function registerButtons() {
 }
 
 //Get the array
-async function loadJSON() {
-  const response = await fetch("//petlatkea.dk/2021/hogwarts/students.json");
-  const jsonData = await response.json();
+function loadJSON() {
+  fetch("//petlatkea.dk/2021/hogwarts/students.json")
+    .then((response) => response.json())
+    .then((jsonData) => {
+      // when loaded, prepare objects
+      prepareObjects(jsonData);
+    });
 
-  //When loaded, prepare data objects
-  prepareObjects(jsonData);
-}
-
-function prepareObjects(jsonData) {
-  allStudents = jsonData.map(prepareObject);
-
-  //Filter the first load:
   buildList();
 }
 
-function prepareObject(jsonObject) {
-  const student = Object.create(Student);
+function prepareObjects(jsonData) {
+  jsonData.forEach((jsonObject) => {
+    const student = Object.create(Student);
 
-  //split the fullname into first- and lastname and get that data
-  const texts = jsonObject.fullname.split(" ");
-  student.firstname = texts[0].substring(0, 1).toUpperCase() + texts[0].substring(1);
-  student.lastname = texts[1];
-  student.gender = jsonObject.gender;
-  student.house = jsonObject.house.toLowerCase().trim();
+    //Find the names by creating the firstSpace and lastSpace:
+    const firstSpace = jsonObject.fullname.trim().indexOf(" ");
+    const lastSpace = jsonObject.fullname.trim().lastIndexOf(" ");
 
-  return student;
+    //Split fullname to first- and lastname:
+    student.firstName = jsonObject.fullname.trim().substring(0, firstSpace);
+    student.lastName = jsonObject.fullname.trim().substring(lastSpace).trim();
+
+    //Find middlename and nickname:
+    student.middleName = jsonObject.fullname.substring(firstSpace, lastSpace);
+    if (student.middleName.includes(' " ')) {
+      student.nickName = student.middleName;
+      student.middleName = "";
+    }
+
+    //Correct the capitalization of names:
+    student.firstNameCap = student.firstName.substring(0, 1).toUpperCase() + student.firstName.substring(1, firstSpace).toLowerCase();
+    student.middleNameCap = student.middleName.substring(1, 2).toUpperCase() + student.middleName.substring(1, lastSpace).toLowerCase();
+    student.lastNameCap = student.lastName.substring(0, 1).toUpperCase() + student.lastName.substring(1).toLowerCase();
+
+    //Get gender and correct the capitalization:
+    student.gender = jsonObject.gender.substring(0).trim();
+    student.genderCap = student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase(student.lastName.length);
+
+    //Get house and correct the capitalization:
+    student.house = jsonObject.house.substring(0).trim();
+    student.houseCap = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
+
+    //Inset in the array:
+    student.firstName = student.firstNameCap;
+    student.middleName = student.middleNameCap;
+    student.lastName = student.lastNameCap;
+    student.gender = student.genderCap;
+    student.house = student.houseCap;
+
+    allStudents.push(student);
+  });
+  displayList(allStudents);
 }
 
 function selectFilter(event) {
@@ -177,8 +206,8 @@ function displayStudent(student) {
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
   //set clone data
-  clone.querySelector("[data-field=firstname]").textContent = student.firstname;
-  clone.querySelector("[data-field=lastname]").textContent = student.lastname;
+  clone.querySelector("[data-field=firstname]").textContent = student.firstName;
+  clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   clone.querySelector("[data-field=gender]").textContent = student.gender;
   clone.querySelector("[data-field=house]").textContent = student.house;
 

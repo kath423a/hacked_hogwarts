@@ -54,3 +54,4 @@ student.firstname = texts[0].substring(0, 1).toUpperCase() + texts[0].substring(
 student.lastname = texts[1];
 student.gender = jsonObject.gender;
 student.house = jsonObject.house.toLowerCase().trim();
+return student;
