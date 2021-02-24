@@ -29,6 +29,7 @@ function start() {
 
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
+  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 }
 
 //Get the array
@@ -59,37 +60,121 @@ function prepareObject(jsonObject) {
   return student;
 }
 
-function selectFilter(event) {}
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  console.log(`User selected ${filter}`);
 
-//Objects from the array put in the HTML
-function showNames() {
-  const container = document.querySelector("#container");
-  const temp = document.querySelector("template");
+  setFilter(filter);
+}
 
-  //Each object in the array/sheet gets cloned into the template in the HTML
-  names.forEach((entry) => {
-    if (filter == "all") {
-      let klon = temp.cloneNode(true).content;
-      klon.querySelector(".student_name").textContent = `${entry.fullname}`;
-      klon.querySelector(".student_house").textContent = `${entry.house}`;
+function setFilter(filter) {
+  settings.filterBy = filter;
+  buildList;
+}
 
-      //Eventlisteners for article, so "click" goes to popup, via showPopup-funktionen
-      klon.querySelector("article").addEventListener("click", () => showPopup(entry));
+function filterList(filteredList) {
+  if (settings.filterBy === "gryffindor") {
+    filteredList = allStudents.filter(isGryffindor);
+  } else if (settings.filterBy === "hufflepuff") {
+    filteredList = allStudents.filter(isHufflepuff);
+  } else if (settings.filterBy === "slytherin") {
+    filteredList = allStudents.filter(isSlytherin);
+  } else if (settings.filterBy === "ravenclaw") {
+    filteredList = allStudents.filter(isRavenclaw);
+  }
 
-      //For each object the template will add to the container as a new child
-      container.appendChild(klon);
+  return filteredList;
+}
+
+function isGryffindor(student) {
+  return student.house === "gryffindor";
+}
+
+function isHufflepuff(student) {
+  return student.house === "hufflepuff";
+}
+
+function isSlytherin(student) {
+  return student.house === "slytherin";
+}
+
+function isRavenclaw(student) {
+  return student.house === "ravenclaw";
+}
+
+function selectSort(event) {
+  const sortBy = event.target.dataset.sort;
+  const sortDir = event.target.dataset.sortDirection;
+
+  // find "old" sortby element, and remove .sortBy
+  const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+  oldElement.classList.remove("sortby");
+
+  // indicate active sort
+  event.target.classList.add("sortby");
+
+  // toggle the direction!
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
+  }
+  console.log(`User selected ${sortBy} - ${sortDir}`);
+  setSort(sortBy, sortDir);
+}
+
+function setSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+  buildList();
+}
+
+function sortList(sortedList) {
+  // let sortedList = allAnimals;
+  let direction = 1;
+  if (settings.sortDir === "desc") {
+    direction = -1;
+  } else {
+    settings.direction = 1;
+  }
+
+  sortedList = sortedList.sort(sortByProperty);
+
+  function sortByProperty(studentA, studentB) {
+    if (studentA[settings.sortBy] < studentB[settings.sortBy]) {
+      return -1 * direction;
+    } else {
+      return 1 * direction;
     }
-  });
+  }
+
+  return sortedList;
 }
 
-function showPopup(entry) {
-  popup.style.display = "block";
+function buildList() {
+  const currentList = filterList(allStudents);
+  const sortedList = sortList(currentList);
 
-  //Make the popup with all the details
-  popup.querySelector(".firstname").textContent = `${entry.fullname}`;
-
-  //Get the images from 'images'-folder
-  popup.querySelector(".studentphoto").src = `images/${titel.gsx$billede.$t}.png`;
+  displayList(sortedList);
 }
 
-document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
+function displayList(students) {
+  //clear the list
+  document.querySelector("#list tbody").innerHTML = "";
+
+  //build a new list
+  students.forEach(displayStudent);
+}
+
+function displayStudent(student) {
+  //create clone
+  const clone = document.querySelector("template#student").content.cloneNode(true);
+
+  //set clone data
+  clone.querySelector("[data-field=firstname]").textContent = student.firstname;
+  clone.querySelector("[data-field=lastname]").textContent = student.lastname;
+  clone.querySelector("[data-field=gender]").textContent = student.gender;
+  clone.querySelector("[data-field=house]").textContent = student.house;
+
+  buildList();
+}

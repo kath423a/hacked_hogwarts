@@ -36,7 +36,20 @@
       </article>
     </section>
 
-    <div id="container"></div>
+    <table id="list">
+      <thead>
+        <tr id="sorting">
+          <p>Click for sorting alphabetically</p>
+          <th data-action="sort" data-sort-direction="asc" data-sort="first">Firstname</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="last">Lastname</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- animal template will be copied and inserted here -->
+      </tbody>
+    </table>
 
     <!-- Template shows the html-strukture for each student on the main interface -->
     <template id="student">
