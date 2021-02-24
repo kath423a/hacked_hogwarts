@@ -9,23 +9,24 @@
   <body>
     <h1>Hogwarts Student List</h1>
 
-    <button class="filter" data-action="filter" id="gryffindor">Gryffindor</button>
-    <button class="filter" data-action="filter" id="hufflepuff">Hufflepuff</button>
-    <button class="filter" data-action="filter" id="ravenclaw">Ravenclaw</button>
-    <button class="filter" data-action="filter" id="slytherin">Slytherin</button>
+    <!--Buttons for filtering-->
+    <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+    <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+    <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+    <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
     <br />
-    <button class="filter" data-action="filter" id="allstudents">All Students</button>
-    <button class="filter" data-action="filter" id="expelled">Expelled</button>
-    <button class="filter" data-action="filter" id="non_expelled">Non-expelled</button>
+    <button class="filter" data-action="filter" data-filter="allstudents">All Students</button>
+    <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
+    <button class="filter" data-action="filter" data-filter="non_expelled">Non-expelled</button>
 
     <!--PopUp-window with detailed information about the selected student-->
     <section id="popup">
       <article>
         <div id="luk">X</div>
         <section>
-          <h2>Firstname: <span class="firstname"></span></h2>
+          <h2>Firstname: <span class="popfirstname"></span></h2>
           <h3>Middlename: <span class="middlename"></span></h3>
-          <h3>Lastname: <span class="lastname"></span></h3>
+          <h3>Lastname: <span class="poplastname"></span></h3>
           <h3>Nickname: <span class="nickname"></span></h3>
           <h3>Blood Status: <span class="bloodstatus"></span></h3>
           <h3>Student Status: <span class="studentstatus"></span></h3>
@@ -38,11 +39,14 @@
     <div id="container"></div>
 
     <!-- Template shows the html-strukture for each student on the main interface -->
-    <template>
-      <article>
-        <h2 class="student_name"></h2>
-        <p class="student_house"></p>
-      </article>
+    <template id="student">
+      <tr>
+        <td data-field="firstname">Firstname</td>
+        <td data-field="lastname">Lastname</td>
+        <td data-field="gender">Gender</td>
+        <td data-field="house">House</td>
+        <td><button>Details</button></td>
+      </tr>
     </template>
 
     <script src="script.js"></script>

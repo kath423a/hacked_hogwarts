@@ -1,19 +1,65 @@
 "use strict";
 
 //Eventlistener for loading the DOM, then go to the function "getData"
-document.addEventListener("DOMContentLoaded", getData);
+document.addEventListener("DOMContentLoaded", start);
 
 //Variables created:
-let names;
-let filter = "all";
+let allStudents = [];
+
+//The prototype for all students:
+const Student = {
+  firstname: "",
+  lastname: "",
+  gender: "",
+  house: "",
+};
+
+const settings = {
+  filter: "all",
+};
+
+function start() {
+  console.log("Readyyyyy");
+
+  loadJSON();
+
+  // Add event-listeners to filter and sort buttons
+  registerButtons();
+}
+
+function registerButtons() {
+  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
+}
 
 //Get the array
-async function getData() {
-  const JSONData = await fetch("//petlatkea.dk/2021/hogwarts/students.json");
-  names = await JSONData.json();
+async function loadJSON() {
+  const response = await fetch("//petlatkea.dk/2021/hogwarts/students.json");
+  const jsonData = await response.json();
 
-  showNames();
+  //When loaded, prepare data objects
+  prepareObjects(jsonData);
 }
+
+function prepareObjects(jsonData) {
+  allStudents = jsonData.map(prepareObject);
+
+  //Filter the first load:
+  buildList();
+}
+
+function prepareObject(jsonObject) {
+  const student = Object.create(Student);
+
+  const texts = jsonObject.fullname.split(" ");
+  student.firstname = texts[0];
+  student.lastname = texts[1];
+  student.gender = jsonObject.gender;
+  student.house = jsonObject.house;
+
+  return student;
+}
+
+function selectFilter(event) {}
 
 //Objects from the array put in the HTML
 function showNames() {
