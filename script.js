@@ -248,7 +248,7 @@ function showPopup(student) {
   document.querySelector(".nickname").textContent = student.nickName;
   //document.querySelector(".bloodstatus").textContent = student.bloodStatus;
   document.querySelector(".house").textContent = student.house;
-  document.querySelector("img").src = student.image;
+  document.querySelector("img").src = `images/${student.image}`;
 
   //show popup
   //document.querySelector("#popup").classList.add("");
