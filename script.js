@@ -15,6 +15,7 @@ const Student = {
   middlename: "null",
   nickname: "null",
   bloodStatus: "null",
+  image: "",
 };
 
 const settings = {
@@ -37,7 +38,7 @@ function registerButtons() {
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 
   //For the details-button --> show popup - DOSEN'T WORK YET
-  document.querySelectorAll("[data-action='popup']").forEach((button) => button.addEventListener("click", showPopup));
+  //document.querySelector("#details_popup").addEventListener("click", showPopup);
 }
 
 //Get the array
@@ -83,6 +84,9 @@ function prepareObjects(jsonData) {
     //Get house and correct the capitalization:
     student.house = jsonObject.house.substring(0).trim();
     student.houseCap = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
+
+    //Images:
+    student.image = student.lastName + "_" + student.firstName.substring(0, 1) + ".png".toLowerCase();
 
     //Inset in the array:
     student.firstName = student.firstNameCap;
@@ -221,6 +225,8 @@ function displayStudent(student) {
   clone.querySelector("[data-field=gender]").textContent = student.gender;
   clone.querySelector("[data-field=house]").textContent = student.house;
 
+  clone.querySelector("#details_popup").addEventListener("click", () => showPopup(student));
+
   document.getElementById("student_list").appendChild(clone);
 }
 
@@ -230,21 +236,25 @@ POPUP
 
 */
 
-function showPopup() {
+function showPopup(student) {
   popup.style.display = "block";
 
-  console.log("showing the popup");
+  console.log("Showing the popup");
 
   //set student clone data - student detailed info:
   document.querySelector(".popfirstname").textContent = student.firstName;
   document.querySelector(".middlename").textContent = student.middleName;
   document.querySelector(".poplastname").textContent = student.lastName;
   document.querySelector(".nickname").textContent = student.nickName;
-  document.querySelector(".bloodstatus").textContent = student.bloodStatus;
+  //document.querySelector(".bloodstatus").textContent = student.bloodStatus;
+  document.querySelector(".house").textContent = student.house;
+  document.querySelector("img").src = student.image;
 
   //show popup
-  document.querySelector("#popup").classList.add("");
+  //document.querySelector("#popup").classList.add("");
 
   //Buttons
-  document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
 }
+
+//Close the popup
+document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
