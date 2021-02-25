@@ -29,6 +29,16 @@ body {
   padding: 2em;
   position: relative;
   justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+img {
+  height: 200px;
+}
+
+#column_right {
+  margin-left: 100px;
 }
 
 #luk {
