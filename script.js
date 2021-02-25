@@ -14,6 +14,7 @@ const Student = {
   house: "",
   middlename: "null",
   nickname: "null",
+  bloodStatus: "null",
 };
 
 const settings = {
@@ -34,6 +35,9 @@ function start() {
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+
+  //For the details-button --> show popup
+  document.querySelectorAll("[data-action='details_popup']").forEach((button) => button.addEventListener("click", showPopup));
 }
 
 //Get the array
@@ -140,7 +144,7 @@ function selectSort(event) {
   const sortDir = event.target.dataset.sortDirection;
 
   // find "old" sortby element, and remove .sortBy
-  //const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+  const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
   //oldElement.classList.remove("sortby");
 
   // indicate active sort
@@ -215,4 +219,21 @@ function displayStudent(student) {
   clone.querySelector("[data-field=house]").textContent = student.house;
 
   document.getElementById("student_list").appendChild(clone);
+}
+
+function popUp() {
+  popup.style.display = "block";
+
+  //set student clone data - student detailed info:
+  document.querySelector(".popfirstname").textContent = student.firstName;
+  document.querySelector(".middlename").textContent = student.middleName;
+  document.querySelector(".poplastname").textContent = student.lastName;
+  document.querySelector(".nickname").textContent = student.nickName;
+  document.querySelector(".bloodstatus").textContent = student.bloodStatus;
+
+  //show popup
+  document.querySelector("#popup").classList.add("");
+
+  //Buttons
+  document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
 }

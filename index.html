@@ -23,15 +23,19 @@
     <section id="popup">
       <article>
         <div id="luk">X</div>
-        <section>
+        <section id="column_left">
           <h2>Firstname: <span class="popfirstname"></span></h2>
           <h3>Middlename: <span class="middlename"></span></h3>
           <h3>Lastname: <span class="poplastname"></span></h3>
           <h3>Nickname: <span class="nickname"></span></h3>
           <h3>Blood Status: <span class="bloodstatus"></span></h3>
-          <h3>Student Status: <span class="studentstatus"></span></h3>
-          <h3>House Crest and Colors: <span class="house_crest_colors"></span></h3>
+          <!-- <h3>Student Status: <span class="studentstatus"></span></h3> -->
+          <!-- <h3>House Crest and Colors: <span class="house_crest_colors"></span></h3> -->
+        </section>
+        <section id="column_right">
           <img class="studentphoto" src="" alt="" />
+          <button id="prefect_student"></button>
+          <button id="expell_student"></button>
         </section>
       </article>
     </section>
@@ -60,7 +64,7 @@
         <td data-field="lastname">Lastname</td>
         <td data-field="gender">Gender</td>
         <td data-field="house">House</td>
-        <td><button>Details</button></td>
+        <td><button data-action="details_popup">Details</button></td>
       </tr>
     </template>
 
