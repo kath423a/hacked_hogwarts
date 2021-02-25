@@ -37,7 +37,7 @@ function registerButtons() {
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 
   //For the details-button --> show popup
-  document.querySelectorAll("[data-action='details_popup']").forEach((button) => button.addEventListener("click", showPopup));
+  document.querySelectorAll("[data-action='popup']").forEach((button) => button.addEventListener("click", showPopup));
 }
 
 //Get the array
@@ -221,8 +221,16 @@ function displayStudent(student) {
   document.getElementById("student_list").appendChild(clone);
 }
 
-function popUp() {
+/*
+
+POPUP
+
+*/
+
+function showPopup() {
   popup.style.display = "block";
+
+  console.log("showing the popup");
 
   //set student clone data - student detailed info:
   document.querySelector(".popfirstname").textContent = student.firstName;
