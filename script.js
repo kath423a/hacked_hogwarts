@@ -97,6 +97,7 @@ function selectFilter(event) {
   console.log(`User selected ${filter}`);
 
   setFilter(filter);
+  buildList();
 }
 
 function setFilter(filter) {
@@ -139,8 +140,8 @@ function selectSort(event) {
   const sortDir = event.target.dataset.sortDirection;
 
   // find "old" sortby element, and remove .sortBy
-  const oldElement = document.querySelector(`[data-sort='${sortBy}']`);
-  // oldElement.classList.remove("sortby");
+  //const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+  //oldElement.classList.remove("sortby");
 
   // indicate active sort
   event.target.classList.add("sortby");
@@ -162,12 +163,12 @@ function setSort(sortBy, sortDir) {
 }
 
 function sortList(sortedList) {
-  // let sortedList = allStudents
+  sortedList = allStudents;
   let direction = 1;
   if (settings.sortDir === "desc") {
     direction = -1;
   } else {
-    direction = 1;
+    settings.direction = 1;
   }
 
   sortedList = sortedList.sort(sortByProperty);
@@ -187,7 +188,7 @@ function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
 
-  // console.log(sortedList);
+  console.log(sortedList);
 
   displayList(sortedList);
 }
