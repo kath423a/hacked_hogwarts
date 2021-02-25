@@ -1,6 +1,14 @@
+/* GENEREL STYLING */
+
 h1 {
   text-align: center;
 }
+
+body {
+  background-color: rgb(211, 189, 163);
+}
+
+/* POPUP STYLING */
 
 #popup {
   position: fixed;
@@ -34,7 +42,43 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-/* ............................ */
+/* STYLING PÅ STUDENTLIST */
+
+#button_section1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#button_section2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  text-align: center;
+}
+
+#list {
+  font-size: 1.5em;
+  display: flex;
+  margin-left: -340px;
+}
+
+th {
+  padding-left: 100px;
+}
+
+#student_list {
+  margin-left: 250px;
+  /*border: 1px solid black;*/
+}
+
+td {
+  padding-left: 60px;
+  padding-right: 60px;
+}
 
 [data-action] {
   cursor: pointer;

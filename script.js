@@ -36,7 +36,7 @@ function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 
-  //For the details-button --> show popup
+  //For the details-button --> show popup - DOSEN'T WORK YET
   document.querySelectorAll("[data-action='popup']").forEach((button) => button.addEventListener("click", showPopup));
 }
 
@@ -140,6 +140,7 @@ function isRavenclaw(house) {
 }
 
 function selectSort(event) {
+  console.log(selectSort);
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
 
@@ -167,7 +168,7 @@ function setSort(sortBy, sortDir) {
 }
 
 function sortList(sortedList) {
-  sortedList = allStudents;
+  //sortedList = allStudents;
   let direction = 1;
   if (settings.sortDir === "desc") {
     direction = -1;
@@ -178,6 +179,8 @@ function sortList(sortedList) {
   sortedList = sortedList.sort(sortByProperty);
 
   function sortByProperty(studentA, studentB) {
+    console.log(settings.sortBy);
+    console.log(studentA);
     if (studentA[settings.sortBy] < studentB[settings.sortBy]) {
       return -1 * direction;
     } else {
@@ -201,7 +204,7 @@ function displayList(students) {
   //clear the list
   document.querySelector("#student_list").innerHTML = "";
 
-  // console.log(students);
+  //console.log(students);
 
   //build a new list
   students.forEach(displayStudent);

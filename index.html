@@ -10,15 +10,18 @@
     <h1>Hogwarts Student List</h1>
 
     <!--Buttons for filtering-->
-    <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-    <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
-    <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-    <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-    <br />
-    <button class="filter" data-action="filter" data-filter="allstudents">All Students</button>
-    <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
-    <button class="filter" data-action="filter" data-filter="non_expelled">Non-expelled</button>
-
+    <section id="button_section1">
+      <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+      <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+      <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+      <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+      <br />
+    </section>
+    <section id="button_section2">
+      <button class="filter" data-action="filter" data-filter="allstudents">All Students</button>
+      <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
+      <button class="filter" data-action="filter" data-filter="non_expelled">Non-expelled</button>
+    </section>
     <!--PopUp-window with detailed information about the selected student-->
     <section id="popup">
       <article>
@@ -44,8 +47,8 @@
       <thead>
         <tr id="sorting">
           <p>Click on category for sorting alphabetically</p>
-          <th data-action="sort" data-sort-direction="asc" data-sort="firstname">Firstname</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="lastname">Lastname</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="firstName">Firstname</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Lastname</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
         </tr>
