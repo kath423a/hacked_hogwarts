@@ -18,6 +18,7 @@ const Student = {
   bloodStatus: "null",
   image: "",
   expelled: false,
+  prefect: false,
 };
 
 const settings = {
@@ -266,6 +267,11 @@ function showPopup(student) {
   function clickExpel() {
     expellStudent(student);
   }
+
+  document.querySelector("#popup #prefect_student").addEventListener("click", clickPrefect);
+  function clickPrefect() {
+    prefectStudent(student);
+  }
 }
 
 //Close the popup
@@ -287,4 +293,103 @@ function expellStudent(student) {
   expelledList.unshift(expelledStudent[0]);
   console.log(expelledList);
   buildList();
+}
+
+function prefectStudent(student) {
+  //close the popup
+  document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
+
+  //make student prefect:
+  console.log(student);
+  if (student.prefect === true) {
+    student.prefect = false;
+  } else {
+    checkPrefect(student);
+  }
+  buildList();
+}
+
+function checkPrefect(prefectedStudent) {
+  const prefected = allStudents.filter((student) => student.prefect);
+  const prefectedNumber = prefected.length;
+  const other = prefected.filter((student) => student.house === prefectedStudent.house).shift();
+
+  //check if there is another from same house:
+  if (other !== undefined) {
+    console.log("There can only be one from each house");
+    removeOther(other);
+  } else if (prefectedNumber >= 2) {
+    console.log("There can only be two prefected students in total");
+    removeAOrB(prefected[0], prefected[1]);
+  } else {
+    makePrefect(prefectedStudent);
+  }
+
+  function removeOther(other) {
+    //ask to remove or ignore
+    document.querySelector("#remove_other").classList.remove("hide");
+    document.querySelector("#remove_other .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
+
+    document.querySelector("#remove_other [data-field=otherwinner]").textContent = other.firstName;
+
+    //if ignore - do nothing ..
+    function closeDialog() {
+      document.querySelector("#remove_other").classList.add("hide");
+      document.querySelector("#remove_other .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#remove_other #removeother").removeEventListener("click", clickRemoveOther);
+    }
+
+    //if remove other:
+    function clickRemoveOther() {
+      removePrefect(other);
+      makePrefect(prefectedStudent);
+      buildList();
+      closeDialog();
+    }
+  }
+
+  function removeAOrB(prefectA, prefectB) {
+    //ask the user to ignore or remove A or B
+    document.querySelector("#remove_aorb").classList.remove("hide");
+    document.querySelector("#remove_aorb .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#remove_aorb #removea").addEventListener("click", clickRemoveA);
+    document.querySelector("#remove_aorb #removeb").addEventListener("click", clickRemoveB);
+
+    //show names on buttons
+    document.querySelector("#remove_aorb [data-field=prefectA]").textContent = prefectA.firstName;
+    document.querySelector("#remove_aorb [data-field=prefectB]").textContent = prefectB.firstName;
+
+    //if ignore - do nothing ..
+    function closeDialog() {
+      document.querySelector("#remove_aorb").classList.add("hide");
+      document.querySelector("#remove_aorb .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#remove_aorb #removea").removeEventListener("click", clickRemoveA);
+      document.querySelector("#remove_aorb #removeb").removeEventListener("click", clickRemoveB);
+    }
+
+    function clickRemoveA() {
+      //if removeA:
+      removePrefect(prefectA);
+      makePrefect(prefectedStudent);
+      buildList();
+      closeDialog();
+    }
+
+    function clickRemoveB() {
+      //else - if removeB:
+      removePrefect(prefectB);
+      makePrefect(prefectedStudent);
+      buildList();
+      closeDialog();
+    }
+  }
+
+  function removePrefect(prefectStudent) {
+    prefectStudent.prefect = false;
+  }
+
+  function makePrefect(student) {
+    student.prefect = true;
+  }
 }
