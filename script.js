@@ -262,7 +262,10 @@ function showPopup(student) {
   //document.querySelector("#popup").classList.add("");
 
   //Buttons
-  document.querySelector("#popup #expell_student").addEventListener("click", expellStudent);
+  document.querySelector("#popup #expell_student").addEventListener("click", clickExpel);
+  function clickExpel() {
+    expellStudent(student);
+  }
 }
 
 //Close the popup
@@ -274,11 +277,12 @@ Expel students
 
 */
 
-function expellStudent() {
+function expellStudent(student) {
   //close the popup
   document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
 
   //expel the student:
+  console.log(student);
   const eStudent = allStudents.indexOf(student);
   const expelledStudent = allStudents.splice(eStudent, 1);
   expelledList.unshift(expelledStudent[0]);
