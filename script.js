@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", start);
 
 //Variables created:
 let allStudents = [];
+let expelledList = [];
 
 //The prototype for all students:
 const Student = {
@@ -16,6 +17,7 @@ const Student = {
   nickname: "null",
   bloodStatus: "null",
   image: "",
+  expelled: false,
 };
 
 const settings = {
@@ -122,6 +124,8 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(isSlytherin);
   } else if (settings.filterBy === "ravenclaw") {
     filteredList = allStudents.filter(isRavenclaw);
+  } else if (settings.filterBy === "expelled") {
+    filteredList = allStudents.filter(isExpelled);
   }
 
   return filteredList;
@@ -141,6 +145,10 @@ function isSlytherin(house) {
 
 function isRavenclaw(house) {
   return house.house === "Ravenclaw";
+}
+
+function isExpelled(expelled) {
+  return student.expelled === "Expelled";
 }
 
 function selectSort(event) {
@@ -254,7 +262,26 @@ function showPopup(student) {
   //document.querySelector("#popup").classList.add("");
 
   //Buttons
+  document.querySelector("#popup #expell_student").addEventListener("click", expellStudent);
 }
 
 //Close the popup
 document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
+
+/*
+
+Expel students
+
+*/
+
+function expellStudent() {
+  //close the popup
+  document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
+
+  //expel the student:
+  const eStudent = allStudents.indexOf(student);
+  const expelledStudent = allStudents.splice(eStudent, 1);
+  expelledList.unshift(expelledStudent[0]);
+  console.log(expelledList);
+  buildList();
+}
