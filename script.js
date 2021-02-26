@@ -125,7 +125,7 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "ravenclaw") {
     filteredList = allStudents.filter(isRavenclaw);
   } else if (settings.filterBy === "expelled") {
-    filteredList = allStudents.filter(isExpelled);
+    filteredList = expelledList;
   }
 
   return filteredList;
@@ -147,8 +147,8 @@ function isRavenclaw(house) {
   return house.house === "Ravenclaw";
 }
 
-function isExpelled(expelled) {
-  return student.expelled === "Expelled";
+function isExpelled(student) {
+  return student.expelled == "expelled";
 }
 
 function selectSort(event) {
@@ -274,7 +274,6 @@ document.querySelector("#luk").addEventListener("click", () => (popup.style.disp
 /*
 
 Expel students
-
 */
 
 function expellStudent(student) {
