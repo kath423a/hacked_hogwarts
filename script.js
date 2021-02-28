@@ -39,9 +39,6 @@ function start() {
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
-
-  //For the details-button --> show popup - DOSEN'T WORK YET
-  //document.querySelector("#details_popup").addEventListener("click", showPopup);
 }
 
 //Get the array
@@ -257,7 +254,7 @@ function showPopup(student) {
   document.querySelector(".nickname").textContent = student.nickName;
   //document.querySelector(".bloodstatus").textContent = student.bloodStatus;
   document.querySelector(".house").textContent = student.house;
-  document.querySelector("img").src = `images/${student.image}`;
+  document.querySelector("img").src = `images/${student.image}`.toLowerCase();
 
   //show popup
   //document.querySelector("#popup").classList.add("");
